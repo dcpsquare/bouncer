@@ -17,3 +17,15 @@ sudo docker-compose up
 
 4. Create new app in django project
 sudo docker-compose run --rm app sh -c "python manage.py startapp bouncer"
+
+5. Test Cloud SDK
+sudo docker-compose -f docker-compose-deploy.yml run --rm gcloud gcloud --version
+
+6. gcloud Authentication
+sudo docker-compose -f docker-compose-deploy.yml run gcloud gcloud auth login
+
+7. django command collect all the static file
+sudo docker-compose run --rm app sh -c "python manage.py collectstatic"
+
+8. deploy to gcloud
+sudo docker-compose -f docker-compose-deploy.yml run --rm gcloud gcloud app deploy --project staging-luxe
