@@ -1,0 +1,19 @@
+a. first create project on git with python gitignore file (add /static and /data)
+b. create requirements.txt file
+c. create Dockerfile
+d. create .dockerignore file
+e. create docker-compose.yml file
+
+Now Open terminal and run following commands :
+
+1. Build project
+sudo docker-compose build
+
+2. create django project in docker container
+sudo docker-compose run --rm app sh -c "django-admin startproject app ."
+
+3. Run django project (run server) and open url http://127.0.0.1:8000/ to see app
+sudo docker-compose up
+
+4. Create new app in django project
+sudo docker-compose run --rm app sh -c "python manage.py startapp bouncer"
