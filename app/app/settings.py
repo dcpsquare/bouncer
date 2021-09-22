@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+from app import secrets
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-og(8_civ8(+r%&+qf5(k+$xpfxin7=%s-yh4dvxrnm-caosyga'
+
+# SECRET_KEY = 'django-insecure-og(8_civ8(+r%&+qf5(k+$xpfxin7=%s-yh4dvxrnm-caosyga' #commented
+
+SECRET_KEY = secrets.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -49,6 +54,8 @@ MIDDLEWARE = [
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app.datastore.NDBMiddleware',
+
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -143,3 +150,9 @@ LOGGING = {
         'level':'DEBUG'
     }
 }
+
+IS_GAE = os.environ.get('GAE_APPLICATION', False)
+GOOGLE_CLOUD_PROJECT = os.environ.get('GOOGLE_CLOUD_PROJECT')
+DATASTORE_NAMESPACE = 'main'
+
+TEST_RUNNER = 'app.datastore.TestRunner'

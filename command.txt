@@ -29,3 +29,9 @@ sudo docker-compose run --rm app sh -c "python manage.py collectstatic"
 
 8. deploy to gcloud
 sudo docker-compose -f docker-compose-deploy.yml run --rm gcloud gcloud app deploy --project staging-luxe
+
+9. Run test Runner command
+sudo docker-compose run --rm app sh -c "python manage.py test"
+
+10. To open django shell to execute commands
+sudo docker-compose run --rm app sh -c "python manage.py shell"
